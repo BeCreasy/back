@@ -1,6 +1,7 @@
 package com.test.back.service;
 
 
+import com.test.back.Exception.ProductNotFoundException;
 import com.test.back.model.Product;
 import com.test.back.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
             }
 
             return productRepository.save(product);
-        }).orElseThrow(() -> new RuntimeException("Product not found"));
+        }).orElseThrow(() -> new ProductNotFoundException(updatedProduct.getId()));
     }
     @Override
     public void deleteProduct(Long id) {
